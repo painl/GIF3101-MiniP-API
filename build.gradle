@@ -2,15 +2,15 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 mainClassName = "com.github.pain_l.APIServer"
+applicationName = "app"
+
+defaultTasks = ['clean', 'jar']
 
 sourceCompatibility = 1.8
 version = '0.0.0'
 
 repositories {
     mavenCentral()
-    maven {
-        url 'http://repo.jenkins-ci.org/public/'
-    }
 }
 
 dependencies {
@@ -62,8 +62,18 @@ dependencies {
     testCompile 'com.google.truth:truth:0.27'
 }
 
-task stage {
-  dependsOn build
+task stage(dependsOn: ['clean', 'installApp'])
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.github.pain_l.APIServer'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } } {
+        // remove all signature files
+        exclude 'META-INF/*.SF'
+        exclude 'META-INF/*.DSA'
+        exclude 'META-INF/*.RSA'
+    }
 }
 
 task wrapper(type: Wrapper) {
