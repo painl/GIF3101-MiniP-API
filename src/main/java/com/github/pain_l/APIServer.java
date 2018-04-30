@@ -4,9 +4,6 @@ import static spark.Spark.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import javaslang.control.Option;
-import javaslang.control.Try;
-
 public class APIServer
 {
     private static ObjectMapper jsonObjectMapper = new ObjectMapper();
@@ -17,12 +14,7 @@ public class APIServer
 
     public static void main(String[] args)
     {
-        Integer portNumber = Try.of(() -> Integer.valueOf(System.getenv("PORT"))).orElseGet((t) -> {
-            System.err.println("There was an error retrieving PORT env var using the default one (8080)");
-            return 8080;
-        });
-
-        port(portNumber);
+        port(8080);
 
         get("/", (req, res) -> "BlueGarou API");
 
