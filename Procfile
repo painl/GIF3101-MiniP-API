@@ -1,1 +1,1 @@
-web: build/install/gradle-getting-started/bin/gradle-getting-started
+web: build/install/GIF3101-MiniP-API/bin/GIF3101-MiniP-API
