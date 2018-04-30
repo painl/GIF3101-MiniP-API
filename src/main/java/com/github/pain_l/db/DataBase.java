@@ -1,7 +1,9 @@
 package com.github.pain_l.db;
 
 import com.mongodb.*;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 
 public class DataBase {
     private MongoDatabase database;
@@ -24,5 +26,9 @@ public class DataBase {
 
     public MongoDatabase getDatabase() {
         return database;
+    }
+
+    public MongoCollection<Document> getUsersCollection () {
+        return database.getCollection("users");
     }
 }

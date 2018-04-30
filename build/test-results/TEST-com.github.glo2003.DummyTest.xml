@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.github.glo2003.DummyTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-04-30T17:10:45" hostname="101001101" time="0.007">
+  <properties/>
+  <testcase name="aDumbTest" classname="com.github.glo2003.DummyTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -3,6 +3,7 @@ package com.github.pain_l;
 import static spark.Spark.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pain_l.handlers.UserHandler;
 
 public class APIServer
 {
@@ -25,9 +26,8 @@ public class APIServer
 
         get("/", (req, res) -> "BlueGarou API");
 
-        get("/ping", (req, res) -> "pong");
-
-//        get("/schedules/:startOfWeek", new UserHandler(), jsonObjectMapper::writeValueAsString);
+        post("/register", new UserHandler().registerHandler, jsonObjectMapper::writeValueAsString);
+        post("/login", new UserHandler().logHandler, jsonObjectMapper::writeValueAsString);
 
         options("*", (request, response) -> "");
         before((request, response) -> {
