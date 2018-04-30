@@ -14,7 +14,14 @@ public class APIServer
 
     public static void main(String[] args)
     {
-        port(8080);
+        Integer portNumber =  1357;
+        try {
+            portNumber = Integer.valueOf(System.getenv("PORT"));
+        }
+        catch (Exception e) {
+            System.err.println("There was an error retrieving PORT env var using the default one (1357)");
+        }
+        port(portNumber);
 
         get("/", (req, res) -> "BlueGarou API");
 
