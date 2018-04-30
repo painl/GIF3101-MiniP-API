@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="GIF3101-MiniP-API_main" target="1.8" />
+      <module name="GIF3101-MiniP-API_test" target="1.8" />
+      <module name="GIF3101_main" target="1.8" />
+      <module name="GIF3101_test" target="1.8" />
+      <module name="GIF_main" target="1.8" />
+      <module name="GIF_test" target="1.8" />
+      <module name="gradle-getting-started_main" target="1.8" />
+      <module name="gradle-getting-started_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

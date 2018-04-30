@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/GIF3101-MiniP-API.iml" filepath="$PROJECT_DIR$/GIF3101-MiniP-API.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GIF3101-MiniP-API_main.iml" filepath="$PROJECT_DIR$/.idea/modules/GIF3101-MiniP-API_main.iml" group="GIF3101-MiniP-API" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GIF3101-MiniP-API_test.iml" filepath="$PROJECT_DIR$/.idea/modules/GIF3101-MiniP-API_test.iml" group="GIF3101-MiniP-API" />
+    </modules>
+  </component>
+</project>
