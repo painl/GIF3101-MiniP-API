@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = "com.github.glo2003.APIServer"
+mainClassName = "com.github.pain_l.APIServer"
 
 sourceCompatibility = 1.8
 version = '0.0.0'
