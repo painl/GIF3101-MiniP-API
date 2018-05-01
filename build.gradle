@@ -19,6 +19,9 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-core:2.9.4'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.9.4'
 
+    // JAVA JWT
+    compile 'com.auth0:java-jwt:3.3.0'
+
     // MongoDB https://mongodb.github.io/mongo-java-driver/
     compile 'org.mongodb:mongodb-driver:3.6.3'
 

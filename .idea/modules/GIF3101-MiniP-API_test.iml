@@ -13,10 +13,12 @@
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.9.4" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.9.4" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.9.4" level="project" />
+    <orderEntry type="library" name="Gradle: com.auth0:java-jwt:3.3.0" level="project" />
     <orderEntry type="library" name="Gradle: org.mongodb:mongodb-driver:3.6.3" level="project" />
     <orderEntry type="library" name="Gradle: com.sparkjava:spark-core:2.7.2" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: com.google.truth:truth:0.39" level="project" />
+    <orderEntry type="library" name="Gradle: commons-codec:commons-codec:1.11" level="project" />
     <orderEntry type="library" name="Gradle: org.mongodb:bson:3.6.3" level="project" />
     <orderEntry type="library" name="Gradle: org.mongodb:mongodb-driver-core:3.6.3" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.13" level="project" />

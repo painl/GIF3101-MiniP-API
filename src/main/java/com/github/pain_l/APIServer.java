@@ -27,7 +27,7 @@ public class APIServer
         get("/", (req, res) -> "BlueGarou API");
 
         post("/register", new UserHandler().registerHandler, jsonObjectMapper::writeValueAsString);
-        post("/login", new UserHandler().logHandler, jsonObjectMapper::writeValueAsString);
+        post("/login", new UserHandler().loginHandler, jsonObjectMapper::writeValueAsString);
 
         options("*", (request, response) -> "");
         before((request, response) -> {
