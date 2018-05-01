@@ -31,4 +31,8 @@ public class DataBase {
     public MongoCollection<Document> getUsersCollection () {
         return database.getCollection("users");
     }
+
+    public MongoCollection<Document> getStatsCollection () {
+        return database.getCollection("stats");
+    }
 }

@@ -3,6 +3,7 @@ package com.github.pain_l;
 import static spark.Spark.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pain_l.handlers.StatsHandler;
 import com.github.pain_l.handlers.UserHandler;
 
 public class APIServer
@@ -28,6 +29,9 @@ public class APIServer
 
         post("/register", new UserHandler().registerHandler, jsonObjectMapper::writeValueAsString);
         post("/login", new UserHandler().loginHandler, jsonObjectMapper::writeValueAsString);
+
+        post("/stats", new StatsHandler(), jsonObjectMapper::writeValueAsString);
+        get("/stats", new StatsHandler(), jsonObjectMapper::writeValueAsString);
 
         options("*", (request, response) -> "");
         before((request, response) -> {
