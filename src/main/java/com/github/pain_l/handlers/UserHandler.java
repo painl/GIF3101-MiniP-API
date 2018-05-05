@@ -64,6 +64,7 @@ public class UserHandler
         @Override
         public Object handle(Request request, Response response) throws Exception {
             Document status = new Document();
+            Document user;
             status.append("status", "ERROR");
             String authorization = request.headers("Authorization");
             if (authorization != null) {
@@ -81,11 +82,11 @@ public class UserHandler
             if (userString != null && passString != null) {
                 if (DataBase.getInstance().getUsersCollection().find(eq("username", userString)).first() == null)
                     status.append("error", "User does not exist.");
-                else if (DataBase.getInstance().getUsersCollection().find(and(eq("username", userString),
-                        eq("password", passString))).first() != null)
+                else if ((user = DataBase.getInstance().getUsersCollection().find(and(eq("username", userString),
+                        eq("password", passString))).first()) != null)
                 {
                     response.status(200);
-                    return new Document().append("status", "SUCCESS").append("access_token", setToken());
+                    return new Document().append("status", "SUCCESS").append("access_token", setToken(user.getString("username")));
                 }
                 else
                     status.append("error", "Wrong password.");
@@ -101,14 +102,14 @@ public class UserHandler
             JWTVerifier verifier = JWT.require(algorithm)
                     .withIssuer("auth0")
                     .build();
-            DecodedJWT jwt = verifier.verify(token);
+            verifier.verify(token);
         } catch (JWTVerificationException exception){
             return false;
         }
         return true;
     }
 
-    private Document setToken()
+    private Document setToken(String username)
     {
         String token = null;
         Calendar cal = Calendar.getInstance();
@@ -118,6 +119,7 @@ public class UserHandler
             token = JWT.create()
                     .withExpiresAt(cal.getTime())
                     .withIssuer("auth0")
+                    .withClaim("username", username)
                     .sign(algorithm);
         } catch (JWTCreationException exception){
             // Invalid Signing configuration / Couldn't convert Claims.

@@ -19,11 +19,15 @@ public class StatEntry {
     @JsonProperty
     public String winningside;
 
-    public StatEntry(List<String> villagers, List<String> werewolves, String winningside)
+    @JsonProperty
+    public String username;
+
+    public StatEntry(List<String> villagers, List<String> werewolves, String winningside, String username)
     {
         this.villagers = villagers;
         this.werewolves = werewolves;
         this.winningside = winningside;
+        this.username = username;
         DataBase.getInstance().getStatsCollection().insertOne(Document.parse(this.toJson()));
     }
 

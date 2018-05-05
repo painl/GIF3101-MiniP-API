@@ -16,16 +16,18 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Projections.exclude;
 
 public class StatsHandler implements Route {
     @Override
     public Object handle(Request request, Response response) throws Exception {
         Document status = new Document();
+        DecodedJWT token;
         status.append("status", "ERROR");
         String authorization = request.headers("Authorization");
         if (authorization != null) {
-            if (!getVerification(authorization.replaceFirst(".* ", ""))) {
+            if ((token = getVerification(authorization.replaceFirst(".* ", ""))) == null) {
                 response.status(400);
                 return status.append("error", "Bad token.");
             }
@@ -35,6 +37,8 @@ public class StatsHandler implements Route {
             response.status(401);
             return status.append("error", "Unauthorized.");
         }
+        String username = token.getClaim("username").asString();
+
         switch (request.requestMethod()) {
             case "POST":
                 Document body = Document.parse(request.body());
@@ -44,7 +48,7 @@ public class StatsHandler implements Route {
                 if (villagers == null || villagers.size() < 1 || werewolves == null || werewolves.size() < 1
                         || (!side.equals("WEREWOLVES") && !side.equals("VILLAGERS")))
                     return status.append("error", "Error in request body.");
-                StatEntry stats = new StatEntry(villagers, werewolves, side);
+                StatEntry stats = new StatEntry(villagers, werewolves, side, username);
                 response.status(200);
                 status.append("status", "SUCCESS");
                 return status.append("stats", stats);
@@ -52,7 +56,7 @@ public class StatsHandler implements Route {
             case "GET":
                 ArrayList<Document> docs = new ArrayList<>();
                 int i = 0;
-                for (Document doc : DataBase.getInstance().getStatsCollection().find().projection(exclude("_id")))
+                for (Document doc : DataBase.getInstance().getStatsCollection().find(eq("username", username)).projection(exclude("_id", "username")))
                     docs.add(doc.append("id", ++i));
                 response.status(200);
                 return status.append("status", "SUCESS").append("stats", docs);
@@ -60,22 +64,22 @@ public class StatsHandler implements Route {
         return status;
     }
 
-    private boolean getVerification(String token)
+    private DecodedJWT getVerification(String token)
     {
         Algorithm algorithm = null;
         try {
             algorithm = Algorithm.HMAC256("magic");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+            return null;
         }
         try {
             JWTVerifier verifier = JWT.require(algorithm)
                     .withIssuer("auth0")
                     .build();
-            DecodedJWT jwt = verifier.verify(token);
+            return verifier.verify(token);
         } catch (JWTVerificationException exception){
-            return false;
+            return null;
         }
-        return true;
     }
 }
